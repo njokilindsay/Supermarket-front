@@ -24,7 +24,7 @@ const Register = () => {
     } catch (error) {
       setMessage(
         error.response?.data?.error ||
-        "❌ Registration failed. Try another username."
+          "❌ Registration failed. Try another username."
       );
     } finally {
       setLoading(false);
@@ -32,70 +32,54 @@ const Register = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <h2>Customer Registration</h2>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-sm bg-white rounded-2xl shadow-lg p-8"
+      >
+        <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">
+          Customer Registration
+        </h2>
 
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-          style={styles.input}
-        />
+        <div className="space-y-4">
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            className="w-full px-4 py-3 border rounded-lg
+                       focus:outline-none focus:ring-2 focus:ring-blue-600"
+          />
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          style={styles.input}
-        />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="w-full px-4 py-3 border rounded-lg
+                       focus:outline-none focus:ring-2 focus:ring-blue-600"
+          />
 
-        <button type="submit" disabled={loading} style={styles.button}>
-          {loading ? "Registering..." : "Register"}
-        </button>
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium
+                       hover:bg-blue-700 transition disabled:opacity-60"
+          >
+            {loading ? "Registering..." : "Register"}
+          </button>
+        </div>
 
-        {message && <p style={styles.message}>{message}</p>}
+        {message && (
+          <p className="mt-4 text-sm text-center text-gray-700">
+            {message}
+          </p>
+        )}
       </form>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh",
-    background: "#f4f4f4",
-  },
-  form: {
-    background: "#fff",
-    padding: "2rem",
-    borderRadius: "8px",
-    width: "300px",
-    boxShadow: "0 0 10px rgba(0,0,0,0.1)",
-  },
-  input: {
-    width: "100%",
-    padding: "0.6rem",
-    marginBottom: "1rem",
-  },
-  button: {
-    width: "100%",
-    padding: "0.6rem",
-    background: "#2563eb",
-    color: "#fff",
-    border: "none",
-    cursor: "pointer",
-  },
-  message: {
-    marginTop: "1rem",
-    textAlign: "center",
-  },
 };
 
 export default Register;

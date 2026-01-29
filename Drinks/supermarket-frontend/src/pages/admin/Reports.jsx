@@ -7,25 +7,91 @@ const Reports = ({ onBack }) => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    api.get("/api/reports/sales-by-drink").then(res => setByDrink(res.data));
-    api.get("/api/reports/sales-by-branch").then(res => setByBranch(res.data));
-    api.get("/api/reports/total-revenue").then(res => setTotal(res.data));
+    api.get("/api/reports/sales-by-drink").then((res) => setByDrink(res.data));
+    api.get("/api/reports/sales-by-branch").then((res) => setByBranch(res.data));
+    api.get("/api/reports/total-revenue").then((res) => setTotal(res.data));
   }, []);
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h2>Sales Reports</h2>
+    <div className="min-h-screen bg-gray-100 p-6">
+      <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-lg p-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+          Sales Reports
+        </h2>
 
-      <h3>Sales by Drink</h3>
-      <pre>{JSON.stringify(byDrink, null, 2)}</pre>
+        {/* Total Revenue */}
+        <div className="mb-8 text-center">
+          <h3 className="text-lg font-semibold text-gray-700">Total Revenue</h3>
+          <p className="text-3xl font-bold text-green-600 mt-2">KES {total}</p>
+        </div>
 
-      <h3>Sales by Branch</h3>
-      <pre>{JSON.stringify(byBranch, null, 2)}</pre>
+        {/* Sales by Drink */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold text-gray-700 mb-4">Sales by Drink</h3>
+          <div className="overflow-x-auto">
+            <table className="w-full table-auto border-collapse">
+              <thead>
+                <tr className="bg-gray-200 text-gray-700">
+                  <th className="px-4 py-2 text-left">Drink</th>
+                  <th className="px-4 py-2 text-left">Quantity Sold</th>
+                  <th className="px-4 py-2 text-left">Revenue (KES)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {byDrink.map((item, idx) => (
+                  <tr
+                    key={idx}
+                    className="even:bg-gray-50 odd:bg-white hover:bg-gray-100"
+                  >
+                    <td className="px-4 py-2">{item.drinkName}</td>
+                    <td className="px-4 py-2">{item.quantitySold}</td>
+                    <td className="px-4 py-2">{item.revenue}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-      <h3>Total Revenue</h3>
-      <h2>KES {total}</h2>
+        {/* Sales by Branch */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold text-gray-700 mb-4">Sales by Branch</h3>
+          <div className="overflow-x-auto">
+            <table className="w-full table-auto border-collapse">
+              <thead>
+                <tr className="bg-gray-200 text-gray-700">
+                  <th className="px-4 py-2 text-left">Branch</th>
+                  <th className="px-4 py-2 text-left">Quantity Sold</th>
+                  <th className="px-4 py-2 text-left">Revenue (KES)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {byBranch.map((item, idx) => (
+                  <tr
+                    key={idx}
+                    className="even:bg-gray-50 odd:bg-white hover:bg-gray-100"
+                  >
+                    <td className="px-4 py-2">{item.branchName}</td>
+                    <td className="px-4 py-2">{item.quantitySold}</td>
+                    <td className="px-4 py-2">{item.revenue}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-      <button onClick={onBack}>⬅ Back</button>
+        {/* Back Button */}
+        <div className="text-center mt-6">
+          <button
+            onClick={onBack}
+            className="bg-gray-600 text-white px-6 py-3 rounded-lg font-medium
+                       hover:bg-gray-700 transition"
+          >
+            ⬅ Back
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

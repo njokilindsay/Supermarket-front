@@ -1,7 +1,7 @@
 import { useState } from "react";
 import api from "../services/api";
 
-const Login = ({onLogin}) => {
+const Login = ({ onLogin }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -18,23 +18,24 @@ const Login = ({onLogin}) => {
         password,
       });
 
-      // Save user session (simple demo version)
-      localStorage.setItem("user", JSON.stringify({
-        username,
-        role: response.data?.role || "customer",
-      }));
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          username,
+          role: response.data?.role || "customer",
+        })
+      );
 
       onLogin({
-  username,
-  role: response.data?.role || "customer",
-});
+        username,
+        role: response.data?.role || "customer",
+      });
 
       alert("✅ Login successful");
-      // Later we’ll redirect based on role
     } catch (err) {
       setError(
         err.response?.data?.error ||
-        "❌ Invalid username or password"
+          "❌ Invalid username or password"
       );
     } finally {
       setLoading(false);
@@ -42,71 +43,54 @@ const Login = ({onLogin}) => {
   };
 
   return (
-    <div style={styles.container}>
-      <form onSubmit={handleLogin} style={styles.form}>
-        <h2>Login</h2>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
+      <form
+        onSubmit={handleLogin}
+        className="w-full max-w-sm bg-white rounded-2xl shadow-lg p-8"
+      >
+        <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">
+          Login
+        </h2>
 
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-          style={styles.input}
-        />
+        <div className="space-y-4">
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            className="w-full px-4 py-3 border rounded-lg
+                       focus:outline-none focus:ring-2 focus:ring-green-600"
+          />
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          style={styles.input}
-        />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="w-full px-4 py-3 border rounded-lg
+                       focus:outline-none focus:ring-2 focus:ring-green-600"
+          />
 
-        <button type="submit" disabled={loading} style={styles.button}>
-          {loading ? "Logging in..." : "Login"}
-        </button>
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-green-600 text-white py-3 rounded-lg font-medium
+                       hover:bg-green-700 transition disabled:opacity-60"
+          >
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </div>
 
-        {error && <p style={styles.error}>{error}</p>}
+        {error && (
+          <p className="mt-4 text-sm text-red-600 text-center">
+            {error}
+          </p>
+        )}
       </form>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh",
-    background: "#f4f4f4",
-  },
-  form: {
-    background: "#fff",
-    padding: "2rem",
-    borderRadius: "8px",
-    width: "300px",
-    boxShadow: "0 0 10px rgba(0,0,0,0.1)",
-  },
-  input: {
-    width: "100%",
-    padding: "0.6rem",
-    marginBottom: "1rem",
-  },
-  button: {
-    width: "100%",
-    padding: "0.6rem",
-    background: "#16a34a",
-    color: "#fff",
-    border: "none",
-    cursor: "pointer",
-  },
-  error: {
-    marginTop: "1rem",
-    color: "red",
-    textAlign: "center",
-  },
 };
 
 export default Login;
