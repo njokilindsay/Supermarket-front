@@ -34,8 +34,7 @@ const Login = ({ onLogin }) => {
       alert("✅ Login successful");
     } catch (err) {
       setError(
-        err.response?.data?.error ||
-          "❌ Invalid username or password"
+        err.response?.data?.error || "❌ Invalid username or password"
       );
     } finally {
       setLoading(false);
@@ -43,7 +42,18 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-teal-100 px-4">
+      {/* Supermarket Name & Tagline */}
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-gray-800">
+          FreshDrinks Supermarket
+        </h1>
+        <p className="text-gray-600 mt-2">
+          Your one-stop choice for refreshing drinks
+        </p>
+      </div>
+
+      {/* Login Form */}
       <form
         onSubmit={handleLogin}
         className="w-full max-w-sm bg-white rounded-2xl shadow-lg p-8"
@@ -52,41 +62,34 @@ const Login = ({ onLogin }) => {
           Login
         </h2>
 
-        <div className="space-y-4">
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            className="w-full px-4 py-3 border rounded-lg
-                       focus:outline-none focus:ring-2 focus:ring-green-600"
-          />
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+          className="w-full px-4 py-3 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
+        />
 
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="w-full px-4 py-3 border rounded-lg
-                       focus:outline-none focus:ring-2 focus:ring-green-600"
-          />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          className="w-full px-4 py-3 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
+        />
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-green-600 text-white py-3 rounded-lg font-medium
-                       hover:bg-green-700 transition disabled:opacity-60"
-          >
-            {loading ? "Logging in..." : "Login"}
-          </button>
-        </div>
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-teal-600 text-white py-3 rounded-lg font-medium hover:bg-teal-700 transition"
+        >
+          {loading ? "Logging in..." : "Login"}
+        </button>
 
         {error && (
-          <p className="mt-4 text-sm text-red-600 text-center">
-            {error}
-          </p>
+          <p className="mt-4 text-red-500 text-center">{error}</p>
         )}
       </form>
     </div>
@@ -94,3 +97,4 @@ const Login = ({ onLogin }) => {
 };
 
 export default Login;
+

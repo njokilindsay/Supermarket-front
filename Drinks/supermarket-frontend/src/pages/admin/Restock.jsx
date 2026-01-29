@@ -30,8 +30,17 @@ const Restock = ({ onBack }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="max-w-md mx-auto bg-white rounded-2xl shadow-lg p-6">
+    <div className="min-h-screen bg-teal-100 p-6 flex flex-col items-center">
+      {/* Supermarket Name & Tagline */}
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-gray-800">FreshDrinks Supermarket</h1>
+        <p className="text-gray-600 mt-2">
+          Your one-stop choice for refreshing drinks
+        </p>
+      </div>
+
+      {/* Restock Card */}
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-6">
         <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
           Restock Inventory
         </h2>
@@ -42,7 +51,7 @@ const Restock = ({ onBack }) => {
             value={branchId}
             onChange={(e) => setBranchId(e.target.value)}
             className="w-full px-4 py-3 border rounded-lg
-                       focus:outline-none focus:ring-2 focus:ring-green-600"
+                       focus:outline-none focus:ring-2 focus:ring-teal-400"
           >
             <option value="">Select Branch</option>
             {branches.map((b) => (
@@ -57,7 +66,7 @@ const Restock = ({ onBack }) => {
             value={drinkId}
             onChange={(e) => setDrinkId(e.target.value)}
             className="w-full px-4 py-3 border rounded-lg
-                       focus:outline-none focus:ring-2 focus:ring-green-600"
+                       focus:outline-none focus:ring-2 focus:ring-teal-400"
           >
             <option value="">Select Drink</option>
             {drinks.map((d) => (
@@ -74,7 +83,7 @@ const Restock = ({ onBack }) => {
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
             className="w-full px-4 py-3 border rounded-lg
-                       focus:outline-none focus:ring-2 focus:ring-green-600"
+                       focus:outline-none focus:ring-2 focus:ring-teal-400"
           />
 
           {/* Restock Button */}

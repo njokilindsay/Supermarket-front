@@ -32,11 +32,19 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-sm bg-white rounded-2xl shadow-lg p-8"
-      >
+    <div className="min-h-screen flex flex-col justify-center items-center bg-teal-100 px-4">
+      {/* Supermarket Name & Tagline */}
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-gray-800">
+          FreshDrinks Supermarket
+        </h1>
+        <p className="text-gray-600 mt-2">
+          Your one-stop choice for refreshing drinks
+        </p>
+      </div>
+
+      {/* Registration Form */}
+      <form className="w-full max-w-sm bg-white rounded-2xl shadow-lg p-8" onSubmit={handleSubmit}>
         <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">
           Customer Registration
         </h2>
@@ -48,8 +56,7 @@ const Register = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
-            className="w-full px-4 py-3 border rounded-lg
-                       focus:outline-none focus:ring-2 focus:ring-blue-600"
+            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
           />
 
           <input
@@ -58,22 +65,24 @@ const Register = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full px-4 py-3 border rounded-lg
-                       focus:outline-none focus:ring-2 focus:ring-blue-600"
+            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
           />
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium
-                       hover:bg-blue-700 transition disabled:opacity-60"
+            className="w-full bg-teal-600 text-white py-3 rounded-lg font-medium hover:bg-teal-700 transition disabled:opacity-60"
           >
             {loading ? "Registering..." : "Register"}
           </button>
         </div>
 
         {message && (
-          <p className="mt-4 text-sm text-center text-gray-700">
+          <p
+            className={`mt-4 text-sm text-center ${
+              message.startsWith("✅") ? "text-green-600" : "text-red-500"
+            }`}
+          >
             {message}
           </p>
         )}
@@ -83,3 +92,4 @@ const Register = () => {
 };
 
 export default Register;
+

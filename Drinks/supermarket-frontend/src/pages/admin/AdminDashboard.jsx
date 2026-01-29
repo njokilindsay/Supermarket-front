@@ -1,6 +1,15 @@
 const AdminDashboard = ({ onNavigate }) => {
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-teal-100 flex flex-col items-center justify-center px-4">
+      {/* Supermarket Name & Tagline */}
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-gray-800">FreshDrinks Supermarket</h1>
+        <p className="text-gray-600 mt-2">
+          Your one-stop choice for refreshing drinks
+        </p>
+      </div>
+
+      {/* Dashboard Card */}
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
         <h2 className="text-2xl font-bold text-gray-800 text-center mb-8">
           Admin Dashboard
@@ -37,4 +46,3 @@ const AdminDashboard = ({ onNavigate }) => {
 };
 
 export default AdminDashboard;
-
